@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="users">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Connection_Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsOnline" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="chats" nillable="true" type="tns:ArrayOfchats" />
+      <xs:element minOccurs="0" name="chats1" nillable="true" type="tns:ArrayOfchats" />
+      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="users" nillable="true" type="tns:users" />
+  <xs:complexType name="ArrayOfchats">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="chats" nillable="true" type="tns:chats" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfchats" nillable="true" type="tns:ArrayOfchats" />
+  <xs:complexType name="chats">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Chat_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="User_1" type="xs:int" />
+      <xs:element minOccurs="0" name="User_2" type="xs:int" />
+      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
+      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
+      <xs:element minOccurs="0" name="users1" nillable="true" type="tns:users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="chats" nillable="true" type="tns:chats" />
+  <xs:complexType name="ArrayOfmessages">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="messages" nillable="true" type="tns:messages" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmessages" nillable="true" type="tns:ArrayOfmessages" />
+  <xs:complexType name="messages">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Chat_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="From_User" type="xs:int" />
+      <xs:element minOccurs="0" name="IsRead" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Send_Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="chats" nillable="true" type="tns:chats" />
+      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="messages" nillable="true" type="tns:messages" />
+  <xs:complexType name="ServiceError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceError" nillable="true" type="tns:ServiceError" />
+</xs:schema>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c2a97c6b-fa56-4567-9085-fabe9927786b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:63418/Auth.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Auth.xsd" MetadataType="Schema" ID="7caa3dde-92dd-4e1e-9139-9069f18339f8" SourceId="1" SourceUrl="http://localhost:63418/Auth.svc?xsd=xsd0" />
+    <MetadataFile FileName="Auth1.xsd" MetadataType="Schema" ID="bf05dc9a-1cb3-428b-8df0-bfd9b1ce72a2" SourceId="1" SourceUrl="http://localhost:63418/Auth.svc?xsd=xsd2" />
+    <MetadataFile FileName="Auth2.xsd" MetadataType="Schema" ID="38130da1-2b0c-4b7f-825d-6ab40336f63a" SourceId="1" SourceUrl="http://localhost:63418/Auth.svc?xsd=xsd1" />
+    <MetadataFile FileName="Auth.disco" MetadataType="Disco" ID="b43f91be-a6c7-44ea-99e3-35846bdddb7b" SourceId="1" SourceUrl="http://localhost:63418/Auth.svc?disco" />
+    <MetadataFile FileName="Auth.wsdl" MetadataType="Wsdl" ID="7ffbbc7d-d192-4427-8d9c-109e43d057ae" SourceId="1" SourceUrl="http://localhost:63418/Auth.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

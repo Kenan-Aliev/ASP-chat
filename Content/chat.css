@@ -1,0 +1,61 @@
+﻿*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    justify-content:center;
+}
+
+table{
+    width:100%;
+}
+.notAuthorized {
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid black;
+}
+
+.chatBlock{
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:30vw;
+    height:50vh;
+    background-color:gray;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.chatBlockHide{
+    display:none;
+}
+
+.chatBlock__header {
+    display: flex;
+    flex-direction: column;
+}
+
+.closeBtn{
+    align-self:flex-end;
+}
+
+h2{
+    align-self:center;
+    margin-top:10px;
+}
+
+.typeMessageBlock{
+    align-self:center;
+margin-bottom:20px;
+}
+

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регистрация</h2>
+<form method="post" action="/Auth/Registration">
+    <input type="text" name="UserName" placeholder="Введите ваше имя" />
+    <input type="password" name="Password" placeholder="Введите ваш пароль" />
+    <input type="submit" value="Зарегистрироваться" />
+</form>
+
+
+<div>@ViewBag.Message</div>
+
+
+

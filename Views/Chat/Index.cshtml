@@ -1,0 +1,156 @@
+﻿@model ASP_chat.WcfService.users
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="~/Content/chat.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+    <title>Чат</title>
+</head>
+<body>
+    <input type="hidden" value="@Model.UserName" />
+    <input type="hidden" value="@Model.User_ID" class="hiddenUserId"/>
+    <h1 data-bind="ifnot: isAuth" class="notAuthorized">Вы не авторизованы</h1>
+
+    <div data-bind="visible: isAuth">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Пользователя</th>
+                    <th>Имя Пользователя</th>
+                    <th>Онлайн</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: {data:users()}">
+                <tr style="border-bottom: 1px solid #000000;">
+                    <td>
+                        <span data-bind="text: User_ID"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: UserName"></span>
+                    </td>
+                    <td>
+                        <span data-bind="if: IsOnline">Да</span>
+                        <span data-bind="ifnot: IsOnline">Нет</span>
+
+                    </td>
+                    <td>
+                        <button data-bind="event: { click: $parent.btnClickHandler }">Написать</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="chatBlock" data-bind="visible: isMessageBlockActive">
+            <div class="chatBlock__header">
+                <button class="closeBtn" data-bind="event: { click: closeBtnHandler }">Закрыть</button>
+                <h2 data-bind="text:activeChat"></h2>
+            </div>
+            <div data-bind="foreach: messages()">
+                <p data-bind="text: $data"></p>
+            </div>
+            <div class="typeMessageBlock">
+                <input type="text" class="messageText"/>
+                <button class="sendMessage">Отправить</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script>
+
+
+        const viewModel = {
+            users: ko.observableArray(),
+            isAuth: ko.observable(false),
+            isMessageBlockActive: ko.observable(false),
+            messages:ko.observableArray(),
+            activeChat: ko.observable(""),
+            activeChatConnectionID: ko.observable(""),
+            btnClickHandler: btnClickHandler,
+            closeBtnHandler: closeBtnHandler
+        };
+
+        function btnClickHandler(data) {
+            viewModel.activeChat(data.UserName())
+            viewModel.activeChatConnectionID(data.Connection_Id())
+            viewModel.isMessageBlockActive(true)
+            //const input = document.querySelector(".hiddenUserId")
+            //fetch('/Chat/GetMessages').then((data) => {
+            //    return data.json()
+            //}).then((data) => {
+            //    data.forEach(message => {
+            //        console.log(message)
+            //    }
+            //    )
+            //})
+        }
+
+        function closeBtnHandler() {
+            viewModel.isMessageBlockActive(false)
+        }
+
+
+        const User = function (userData) {
+            const self = this
+            self.User_ID = ko.observable(userData.User_ID)
+            self.UserName = ko.observable(userData.UserName)
+            self.Connection_Id = ko.observable(userData.Connection_Id)
+            self.IsOnline = ko.observable(userData.IsOnline)
+            return self
+        }
+
+        const chat = $.connection.myHub1;
+        chat.client.onConnected = function (user) {
+            for (var i = 0; i < viewModel.users().length; i++) {
+                if (viewModel.users()[i].User_ID() === user.User_ID) {
+                    viewModel.users()[i].IsOnline(user.IsOnline);
+                    viewModel.users()[i].Connection_Id(user.Connection_Id);
+                    break;
+                }
+            }
+        }
+
+        chat.client.addMessage = function (message, username) {
+            console.log(message)
+            if (viewModel.activeChat() === username) {
+                viewModel.messages.push(message)
+            }
+        }
+        const input = document.querySelector('input[type="hidden"]');
+        if (input.value) {
+            viewModel.isAuth(true)
+        }
+        if (viewModel.isAuth() === true) {
+            fetch('/Chat/GetUsers').then((data) => {
+                return data.json()
+            }).then((data) => {
+                data.forEach(user => {
+                    viewModel.users.push(new User(user));
+                })
+                $.connection.hub.start().done(function () {
+                    chat.server.connect(input.value);
+                    const messageText = document.querySelector('.messageText')
+                    document.querySelector('.sendMessage').addEventListener('click', function () {
+                        viewModel.messages.push(messageText.value)
+                        chat.server.sendMessage(viewModel.activeChatConnectionID(), messageText.value,input.value)
+                    })
+                })
+
+            })
+        }
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+    </html>
