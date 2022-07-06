@@ -463,22 +463,22 @@ namespace ASP_chat.ChatService {
         System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientConnectedAsync(string userName, string connectionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
-        ASP_chat.ChatService.messages SendMessage(string fromConnectionId, string toConnectionId);
+        ASP_chat.ChatService.messages SendMessage(int ToUser_ID, string message, int From_User_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(string fromConnectionId, string toConnectionId);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetAllMessagesWithUser", ReplyAction="http://tempuri.org/IChatService/GetAllMessagesWithUserResponse")]
-        ASP_chat.ChatService.messages GetAllMessagesWithUser(int user1_id, int user2_id);
+        ASP_chat.ChatService.messages[] GetAllMessagesWithUser(int user1_id, int user2_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetAllMessagesWithUser", ReplyAction="http://tempuri.org/IChatService/GetAllMessagesWithUserResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.messages> GetAllMessagesWithUserAsync(int user1_id, int user2_id);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientDisconnected", ReplyAction="http://tempuri.org/IChatService/ClientDisconnectedResponse")]
-        ASP_chat.ChatService.users ClientDisconnected(int userId);
+        ASP_chat.ChatService.users ClientDisconnected(string ConnectionID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientDisconnected", ReplyAction="http://tempuri.org/IChatService/ClientDisconnectedResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(int userId);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(string ConnectionID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -516,28 +516,28 @@ namespace ASP_chat.ChatService {
             return base.Channel.ClientConnectedAsync(userName, connectionId);
         }
         
-        public ASP_chat.ChatService.messages SendMessage(string fromConnectionId, string toConnectionId) {
-            return base.Channel.SendMessage(fromConnectionId, toConnectionId);
+        public ASP_chat.ChatService.messages SendMessage(int ToUser_ID, string message, int From_User_ID) {
+            return base.Channel.SendMessage(ToUser_ID, message, From_User_ID);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(string fromConnectionId, string toConnectionId) {
-            return base.Channel.SendMessageAsync(fromConnectionId, toConnectionId);
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID) {
+            return base.Channel.SendMessageAsync(ToUser_ID, message, From_User_ID);
         }
         
-        public ASP_chat.ChatService.messages GetAllMessagesWithUser(int user1_id, int user2_id) {
+        public ASP_chat.ChatService.messages[] GetAllMessagesWithUser(int user1_id, int user2_id) {
             return base.Channel.GetAllMessagesWithUser(user1_id, user2_id);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages> GetAllMessagesWithUserAsync(int user1_id, int user2_id) {
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id) {
             return base.Channel.GetAllMessagesWithUserAsync(user1_id, user2_id);
         }
         
-        public ASP_chat.ChatService.users ClientDisconnected(int userId) {
-            return base.Channel.ClientDisconnected(userId);
+        public ASP_chat.ChatService.users ClientDisconnected(string ConnectionID) {
+            return base.Channel.ClientDisconnected(ConnectionID);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(int userId) {
-            return base.Channel.ClientDisconnectedAsync(userId);
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(string ConnectionID) {
+            return base.Channel.ClientDisconnectedAsync(ConnectionID);
         }
     }
 }

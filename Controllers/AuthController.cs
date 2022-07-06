@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Web.Mvc;
-using ASP_chat.Models;
 using ASP_chat.WcfService;
 
 namespace ASP_chat.Controllers

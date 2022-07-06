@@ -457,10 +457,10 @@ namespace ASP_chat.UsersService {
     public interface IUsers {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsers/GetAllUsers", ReplyAction="http://tempuri.org/IUsers/GetAllUsersResponse")]
-        ASP_chat.UsersService.users[] GetAllUsers();
+        ASP_chat.UsersService.users[] GetAllUsers(int mainUserID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsers/GetAllUsers", ReplyAction="http://tempuri.org/IUsers/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<ASP_chat.UsersService.users[]> GetAllUsersAsync();
+        System.Threading.Tasks.Task<ASP_chat.UsersService.users[]> GetAllUsersAsync(int mainUserID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -490,12 +490,12 @@ namespace ASP_chat.UsersService {
                 base(binding, remoteAddress) {
         }
         
-        public ASP_chat.UsersService.users[] GetAllUsers() {
-            return base.Channel.GetAllUsers();
+        public ASP_chat.UsersService.users[] GetAllUsers(int mainUserID) {
+            return base.Channel.GetAllUsers(mainUserID);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.UsersService.users[]> GetAllUsersAsync() {
-            return base.Channel.GetAllUsersAsync();
+        public System.Threading.Tasks.Task<ASP_chat.UsersService.users[]> GetAllUsersAsync(int mainUserID) {
+            return base.Channel.GetAllUsersAsync(mainUserID);
         }
     }
 }

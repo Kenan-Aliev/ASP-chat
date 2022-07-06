@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ASP_chat.UsersService;
 using ASP_chat.ChatService;
 
@@ -15,12 +14,14 @@ namespace ASP_chat.Controllers
             return View(user);
         }
 
-        public JsonResult GetUsers()
+        [HttpPost]
+        public JsonResult GetUsers(int mainUserID)
         {
-            UsersService.users[] users = usersClient.GetAllUsers();
-            return Json(users, JsonRequestBehavior.AllowGet);
+            UsersService.users[] users = usersClient.GetAllUsers(mainUserID);
+            return Json(users,JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult GetMessages(int user1_id,int user2_id)
         {
             var messages = chatService.GetAllMessagesWithUser(user1_id, user2_id);

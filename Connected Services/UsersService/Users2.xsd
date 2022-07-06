@@ -3,7 +3,9 @@
   <xs:import schemaLocation="http://localhost:63418/Users.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService1" />
   <xs:element name="GetAllUsers">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mainUserID" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetAllUsersResponse">

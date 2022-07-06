@@ -1,16 +1,43 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Войти</h2>
 <form method="post" action="/Auth/Login">
-    <input type="text" name="UserName" placeholder="Введите ваше имя" />
-    <input type="password" name="Password" placeholder="Введите ваш пароль" />
-    <input type="submit" value="Войти" />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Имя</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите ваше имя" name="UserName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Пароль</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль" name="Password">
+    </div>
+    <input type="hidden" value="@ViewBag.Message" name="errorMessage" />
+    <button type="submit" class="btn btn-primary">Войти</button>
 </form>
 
-<div>@ViewBag.Message</div>
+<div class="alert alert-danger w-25 mt-5" role="alert" data-bind="visible:isMessageHave">
+    @ViewBag.Message
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+<script>
+    const viewModel = {
+        isMessageHave: ko.observable(false)
+    }
+
+    const form = document.querySelector('form')
+    if (form.errorMessage.value) {
+        viewModel.isMessageHave(true)
+    }
+
+    ko.applyBindings(viewModel);
+
+
+
+</script>
 
 

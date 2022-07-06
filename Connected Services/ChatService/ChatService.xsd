@@ -19,8 +19,9 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="fromConnectionId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="toConnectionId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ToUser_ID" type="xs:int" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="From_User_ID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,14 +43,14 @@
   <xs:element name="GetAllMessagesWithUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfService1" minOccurs="0" name="GetAllMessagesWithUserResult" nillable="true" type="q3:messages" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfService1" minOccurs="0" name="GetAllMessagesWithUserResult" nillable="true" type="q3:ArrayOfmessages" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClientDisconnected">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="ConnectionID" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

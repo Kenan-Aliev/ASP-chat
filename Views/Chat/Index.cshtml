@@ -6,66 +6,148 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/chat.css" rel="stylesheet" type="text/css" asp-append-version="true" />
     <title>Чат</title>
 </head>
 <body>
     <input type="hidden" value="@Model.UserName" />
-    <input type="hidden" value="@Model.User_ID" class="hiddenUserId"/>
-    <h1 data-bind="ifnot: isAuth" class="notAuthorized">Вы не авторизованы</h1>
+    <input type="hidden" value="@Model.User_ID" class="hiddenUserId" />
+    <div class="notAuthorized" data-bind="visible: isAuth() === false">
+        <h1 class="notAuthorized__title">Вы не авторизованы</h1>
+    </div>
 
-    <div data-bind="visible: isAuth">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID Пользователя</th>
-                    <th>Имя Пользователя</th>
-                    <th>Онлайн</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: {data:users()}">
-                <tr style="border-bottom: 1px solid #000000;">
-                    <td>
-                        <span data-bind="text: User_ID"></span>
-                    </td>
-                    <td>
-                        <span data-bind="text: UserName"></span>
-                    </td>
-                    <td>
-                        <span data-bind="if: IsOnline">Да</span>
-                        <span data-bind="ifnot: IsOnline">Нет</span>
+    <div data-bind="visible: isAuth" class="chat">
+        <nav class="navbar navbar-dark bg-primary">
+            <h3 class="text-white">Добро пожаловать
+             <span data-bind="text:mainUserName"></span>
+            </h3>
+            <button class="btn btn-danger my-2 my-sm-0 text-white" type="button">@Html.ActionLink("Выйти", "Login", "Auth")</button>
+        </nav>
+        <h2>Пользователи Онлайн:</h2>
+        <div class="tableBlock mt-5">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Пользователя</th>
+                        <th scope="col">Имя Пользователя</th>
+                        <th scope="col">Онлайн</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: {data:users()}">
+                    <tr style="border-bottom: 1px solid #000000;">
+                        <th scope="row">
+                            <span data-bind="text: User_ID"></span>
+                        </th>
+                        <td>
+                            <span data-bind="text: UserName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="if: IsOnline">Да</span>
+                            <span data-bind="ifnot: IsOnline">Нет</span>
 
-                    </td>
-                    <td>
-                        <button data-bind="event: { click: $parent.btnClickHandler }">Написать</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            <button data-bind="event: { click: $parent.btnClickHandler }" type="button" class="btn btn-primary"
+                                    data-toggle="modal" data-target="#exampleModalCenter">
+                                Написать
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <div class="chatBlock" data-bind="visible: isMessageBlockActive">
+
+        @*<div class="chatBlock" data-bind="visible: isMessageBlockActive">
             <div class="chatBlock__header">
                 <button class="closeBtn" data-bind="event: { click: closeBtnHandler }">Закрыть</button>
-                <h2 data-bind="text:activeChat"></h2>
+                <h2 data-bind="text:activeChatUserName"></h2>
             </div>
-            <div data-bind="foreach: messages()">
-                <p data-bind="text: $data"></p>
+            <div data-bind="foreach: {data:messages()}" class="messages">
+                <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
             </div>
             <div class="typeMessageBlock">
-                <input type="text" class="messageText"/>
+                <input type="text" class="messageText" data-bind="value:message" />
                 <button class="sendMessage">Отправить</button>
+            </div>
+        </div>*@
+
+
+        @*<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bind="visible: isSnackBarActive">
+            <div class="toast-header">
+                <img src="..." class="rounded mr-2" alt="...">
+                <small class="text-muted">только что</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Какое-то сообщение
+            </div>
+        </div>*@
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+             data-bind="visible: isMessageBlockActive">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle" data-bind="text:activeChatUserName"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event: { click: closeBtnHandler }">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body messages" data-bind="foreach: {data:messages()}">
+                        <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" class="form-control messageText" placeholder="Напишите сообщение" data-bind="value:message" />
+                        <button class="btn btn-primary sendMessage">Отправить</button>
+                    </div>
+                </div>
             </div>
         </div>
 
+
+        <div aria-live="polite" aria-atomic="true" style="position: absolute; left: 0; bottom: 0; min-height: 200px;width:400px; display:flex;
+                     justify-content:center;align-items:center;
+                 ">
+            <div class="toast bg-info">
+                <div class="toast-header">
+                    <strong class="mr-auto" >
+                        У вас новое сообщение от: 
+                        <span data-bind="text:messageFromUser"></span>
+                    </strong>
+                    <small>Только что</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <p data-bind="text:receivedMessage"></p>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="snackBar" >
+            <p>
+                У вас новое сообщение от пользователя:
+                <span data-bind="text:messageFromUser"></span>
+            <p>
+        </div>*@
+
+
     </div>
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
     <script src="~/signalr/hubs"></script>
     <script>
@@ -75,32 +157,21 @@
             users: ko.observableArray(),
             isAuth: ko.observable(false),
             isMessageBlockActive: ko.observable(false),
-            messages:ko.observableArray(),
-            activeChat: ko.observable(""),
+            messages: ko.observableArray(),
+            activeChatUserName: ko.observable(""),
             activeChatConnectionID: ko.observable(""),
+            activeChatID: ko.observable(0),
             btnClickHandler: btnClickHandler,
-            closeBtnHandler: closeBtnHandler
+            closeBtnHandler: closeBtnHandler,
+            mainUserID: ko.observable(0),
+            mainUserName: ko.observable(""),
+            message: ko.observable(""),
+            messageFromUser: ko.observable(""),
+            receivedMessage:ko.observable("")
         };
 
-        function btnClickHandler(data) {
-            viewModel.activeChat(data.UserName())
-            viewModel.activeChatConnectionID(data.Connection_Id())
-            viewModel.isMessageBlockActive(true)
-            //const input = document.querySelector(".hiddenUserId")
-            //fetch('/Chat/GetMessages').then((data) => {
-            //    return data.json()
-            //}).then((data) => {
-            //    data.forEach(message => {
-            //        console.log(message)
-            //    }
-            //    )
-            //})
-        }
-
-        function closeBtnHandler() {
-            viewModel.isMessageBlockActive(false)
-        }
-
+        const messagesBlock = document.querySelector('.messages')
+        const messageText = document.querySelector('.messageText')
 
         const User = function (userData) {
             const self = this
@@ -111,45 +182,119 @@
             return self
         }
 
+        const Message = function (messageData) {
+            const self = this
+            self.Message_ID = ko.observable(messageData.Message_ID)
+            self.Chat_ID = ko.observable(messageData.Chat_ID)
+            self.From_User = ko.observable(messageData.From_User)
+            self.Send_Date = ko.observable(messageData.Send_Date)
+            self.IsRead = ko.observable(messageData.Is_Read)
+            self.Message = ko.observable(messageData.Message)
+            return self
+        }
+
+
+        function btnClickHandler(data) {
+            viewModel.activeChatUserName(data.UserName())
+            viewModel.activeChatConnectionID(data.Connection_Id())
+            viewModel.isMessageBlockActive(true)
+            viewModel.activeChatID(data.User_ID())
+
+            $.ajax({
+                url: "/Chat/GetMessages",
+                type: "POST",
+                data: { "user1_id": viewModel.mainUserID(), "user2_id": viewModel.activeChatID() },
+                success: function (messages) {
+                    messages.forEach(message => {
+                        viewModel.messages.push(new Message(message))
+                    })
+                    messagesBlock.scrollTop = messagesBlock.scrollHeight
+                    //data.forEach(user => {
+                    //    viewModel.users.push(new User(user));
+                    //})
+                }
+            })
+
+        }
+
+        function closeBtnHandler() {
+            viewModel.isMessageBlockActive(false)
+            viewModel.activeChatUserName("")
+            viewModel.activeChatConnectionID("")
+            viewModel.activeChatID(0)
+            viewModel.message("")
+            viewModel.messages.removeAll()
+        }
+
         const chat = $.connection.myHub1;
         chat.client.onConnected = function (user) {
-            for (var i = 0; i < viewModel.users().length; i++) {
-                if (viewModel.users()[i].User_ID() === user.User_ID) {
-                    viewModel.users()[i].IsOnline(user.IsOnline);
-                    viewModel.users()[i].Connection_Id(user.Connection_Id);
-                    break;
-                }
+            viewModel.users.push(new User(user))
+        }
+
+        chat.client.newMessageFromUser = function (message, FromUserID, fromUserName) {
+            if (viewModel.activeChatID() === FromUserID) {
+                viewModel.messages.push(new Message(message))
+                messagesBlock.scrollTop = messagesBlock.scrollHeight
+            }
+            else {
+                viewModel.messageFromUser(fromUserName)
+                viewModel.receivedMessage(message.Message)
+                $('.toast').toast('show')
             }
         }
 
-        chat.client.addMessage = function (message, username) {
-            console.log(message)
-            if (viewModel.activeChat() === username) {
-                viewModel.messages.push(message)
-            }
+        chat.client.writeNewMessage = function (message) {
+            viewModel.messages.push(new Message(message))
+            messagesBlock.scrollTop = messagesBlock.scrollHeight
+            viewModel.message("")
         }
-        const input = document.querySelector('input[type="hidden"]');
-        if (input.value) {
-            viewModel.isAuth(true)
-        }
-        if (viewModel.isAuth() === true) {
-            fetch('/Chat/GetUsers').then((data) => {
-                return data.json()
-            }).then((data) => {
-                data.forEach(user => {
-                    viewModel.users.push(new User(user));
-                })
-                $.connection.hub.start().done(function () {
-                    chat.server.connect(input.value);
-                    const messageText = document.querySelector('.messageText')
-                    document.querySelector('.sendMessage').addEventListener('click', function () {
-                        viewModel.messages.push(messageText.value)
-                        chat.server.sendMessage(viewModel.activeChatConnectionID(), messageText.value,input.value)
-                    })
-                })
 
+        chat.client.onUserDisconnected = function (user) {
+            viewModel.users.remove(function (u) {
+                return u.User_ID() == user.User_ID
             })
         }
+
+        const userId = document.querySelector(".hiddenUserId")
+        const username = document.querySelector('input[type="hidden"]');
+
+        if (username.value) {
+            viewModel.isAuth(true)
+            viewModel.mainUserID(Number(userId.value))
+            viewModel.mainUserName(username.value)
+        }
+        if (viewModel.isAuth() === true) {
+            $.ajax({
+                url: "/Chat/GetUsers",
+                type: "POST",
+                data: { "mainUserID": viewModel.mainUserID() },
+                success: function (data) {
+                    data.forEach(user => {
+                        viewModel.users.push(new User(user));
+                    })
+                    $.connection.hub.start().done(function () {
+                        chat.server.connect(viewModel.mainUserName());
+                        document.querySelector('.sendMessage').addEventListener('click', function () {
+                            const userId = document.querySelector(".hiddenUserId")
+                            chat.server.sendMessage(viewModel.activeChatID(), viewModel.message(), Number(userId.value), viewModel.activeChatConnectionID(), viewModel.mainUserName())
+                        })
+                    })
+                }
+            })
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target.classList[0] === 'modal') {
+                viewModel.closeBtnHandler()
+            }
+        })
+
+        $(".toast").toast({
+            animation: true,
+            autohide: true,
+            delay: 5000
+        })
+
         ko.applyBindings(viewModel);
     </script>
 </body>

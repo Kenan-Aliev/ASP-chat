@@ -7,22 +7,31 @@
 body{
     width:100vw;
     height:100vh;
-    display:flex;
-    align-items:center;
-    flex-direction:column;
-    justify-content:center;
 }
 
-table{
-    width:100%;
+a{
+    color:none;
 }
+
+a:hover{
+    color:none;
+    text-decoration:none
+}
+
 .notAuthorized {
-    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
 }
 
+
+/*
 th, td {
     border: 1px solid black;
-}
+    text-align:center;
+}*/
 
 .chatBlock{
     position:absolute;
@@ -57,5 +66,61 @@ h2{
 .typeMessageBlock{
     align-self:center;
 margin-bottom:20px;
+}
+
+.messages{
+    height:30vh;
+    overflow:auto;
+}
+
+.title{
+    text-align:center;
+}
+
+h2{
+    text-align:center;
+}
+
+
+
+/*.snackBar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 20vw;
+    height: 10vh;
+    background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.snackBar p {
+    text-align:center;
+}*/
+
+
+
+
+
+.table {
+    width: 50% !important;
+    margin: 0 auto;
+}
+
+.chat{
+}
+
+.message {
+    margin: 15px;
+}
+
+.tableBlock {
+    width: 100%;
+    margin:0 auto;
+}
+
+.toast {
+    width: 90% !important;
 }
 
