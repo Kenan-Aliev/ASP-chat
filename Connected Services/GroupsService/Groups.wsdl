@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Groups" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63418/Groups.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63418/Groups.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:63418/Groups.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService1" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IGroups_GetUserGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroups" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_GetUserGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_CreateNewGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewGroup" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_CreateNewGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNewGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_CreateNewGroup_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService1" name="detail" element="q1:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_GetGroupMessages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMessages" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_GetGroupMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_AddUserToGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserToGroup" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_AddUserToGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserToGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_GetGroupMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMembers" />
+  </wsdl:message>
+  <wsdl:message name="IGroups_GetGroupMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMembersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IGroups">
+    <wsdl:operation name="GetUserGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/GetUserGroups" message="tns:IGroups_GetUserGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/GetUserGroupsResponse" message="tns:IGroups_GetUserGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/CreateNewGroup" message="tns:IGroups_CreateNewGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/CreateNewGroupResponse" message="tns:IGroups_CreateNewGroup_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGroups/CreateNewGroupServiceErrorFault" name="ServiceErrorFault" message="tns:IGroups_CreateNewGroup_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/SendMessage" message="tns:IGroups_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/SendMessageResponse" message="tns:IGroups_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMessages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/GetGroupMessages" message="tns:IGroups_GetGroupMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/GetGroupMessagesResponse" message="tns:IGroups_GetGroupMessages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/AddUserToGroup" message="tns:IGroups_AddUserToGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/AddUserToGroupResponse" message="tns:IGroups_AddUserToGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroups/GetGroupMembers" message="tns:IGroups_GetGroupMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroups/GetGroupMembersResponse" message="tns:IGroups_GetGroupMembers_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IGroups" type="tns:IGroups">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserGroups">
+      <soap:operation soapAction="http://tempuri.org/IGroups/GetUserGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewGroup">
+      <soap:operation soapAction="http://tempuri.org/IGroups/CreateNewGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/IGroups/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMessages">
+      <soap:operation soapAction="http://tempuri.org/IGroups/GetGroupMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <soap:operation soapAction="http://tempuri.org/IGroups/AddUserToGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMembers">
+      <soap:operation soapAction="http://tempuri.org/IGroups/GetGroupMembers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Groups">
+    <wsdl:port name="BasicHttpBinding_IGroups" binding="tns:BasicHttpBinding_IGroups">
+      <soap:address location="http://localhost:63418/Groups.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

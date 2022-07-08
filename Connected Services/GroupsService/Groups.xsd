@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfgroups">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups" nillable="true" type="tns:groups" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfgroups" nillable="true" type="tns:ArrayOfgroups" />
+  <xs:complexType name="groups">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Group_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Group_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="groups_users" nillable="true" type="tns:ArrayOfgroups_users" />
+      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="groups" nillable="true" type="tns:groups" />
+  <xs:complexType name="ArrayOfgroups_users">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups_users" nillable="true" type="tns:groups_users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfgroups_users" nillable="true" type="tns:ArrayOfgroups_users" />
+  <xs:complexType name="groups_users">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Group_ID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Groups_Users_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="groups" nillable="true" type="tns:groups" />
+      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="groups_users" nillable="true" type="tns:groups_users" />
   <xs:complexType name="users">
     <xs:sequence>
       <xs:element minOccurs="0" name="Connection_Id" nillable="true" type="xs:string" />
@@ -52,29 +83,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="messages" nillable="true" type="tns:messages" />
-  <xs:complexType name="groups">
+  <xs:complexType name="ServiceError">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Group_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Group_Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="groups_users" nillable="true" type="tns:ArrayOfgroups_users" />
-      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="groups" nillable="true" type="tns:groups" />
-  <xs:complexType name="ArrayOfgroups_users">
+  <xs:element name="ServiceError" nillable="true" type="tns:ServiceError" />
+  <xs:complexType name="ArrayOfusers">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups_users" nillable="true" type="tns:groups_users" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="users" nillable="true" type="tns:users" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfgroups_users" nillable="true" type="tns:ArrayOfgroups_users" />
-  <xs:complexType name="groups_users">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Group_ID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Groups_Users_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="groups" nillable="true" type="tns:groups" />
-      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="groups_users" nillable="true" type="tns:groups_users" />
+  <xs:element name="ArrayOfusers" nillable="true" type="tns:ArrayOfusers" />
 </xs:schema>

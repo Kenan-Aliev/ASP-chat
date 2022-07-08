@@ -146,6 +146,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GroupsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UsersService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +185,22 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\GroupsService\ASP_chat.GroupsService.groups.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\GroupsService\ASP_chat.GroupsService.messages.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\GroupsService\ASP_chat.GroupsService.users.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\GroupsService\Groups.disco" />
+    <None Include="Connected Services\GroupsService\configuration91.svcinfo" />
+    <None Include="Connected Services\GroupsService\configuration.svcinfo" />
+    <None Include="Connected Services\GroupsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Connected Services\UsersService\ASP_chat.UsersService.users.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -193,6 +214,16 @@
     <None Include="Connected Services\ChatService\ChatService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\GroupsService\Groups.wsdl" />
+    <None Include="Connected Services\GroupsService\Groups.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GroupsService\Groups1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GroupsService\Groups2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UsersService\Users.disco" />
     <None Include="Connected Services\UsersService\configuration91.svcinfo" />
     <None Include="Connected Services\UsersService\configuration.svcinfo" />
@@ -200,9 +231,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Connected Services\WcfService\ASP_chat.WcfService.users.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Connected Services\UsersService\Users.wsdl" />
     <None Include="Connected Services\UsersService\Users.xsd">
       <SubType>Designer</SubType>
@@ -213,6 +241,9 @@
     <None Include="Connected Services\UsersService\Users2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Connected Services\WcfService\ASP_chat.WcfService.users.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\WcfService\Auth.disco" />
     <None Include="Connected Services\WcfService\configuration91.svcinfo" />
     <None Include="Connected Services\WcfService\configuration.svcinfo" />
@@ -297,6 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
+    <WCFMetadataStorage Include="Connected Services\GroupsService\" />
     <WCFMetadataStorage Include="Connected Services\UsersService\" />
     <WCFMetadataStorage Include="Connected Services\WcfService\" />
   </ItemGroup>

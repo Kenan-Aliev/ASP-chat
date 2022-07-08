@@ -18,106 +18,209 @@
     </div>
 
     <div data-bind="visible: isAuth" class="chat">
+        <!-- Header -->
         <nav class="navbar navbar-dark bg-primary">
-            <h3 class="text-white">Добро пожаловать
-             <span data-bind="text:mainUserName"></span>
+            <h3 class="text-white">
+                Добро пожаловать
+                <span data-bind="text:mainUserName"></span>
             </h3>
             <button class="btn btn-danger my-2 my-sm-0 text-white" type="button">@Html.ActionLink("Выйти", "Login", "Auth")</button>
         </nav>
-        <h2>Пользователи Онлайн:</h2>
-        <div class="tableBlock mt-5">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">ID Пользователя</th>
-                        <th scope="col">Имя Пользователя</th>
-                        <th scope="col">Онлайн</th>
-                        <th scope="col">Действие</th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: {data:users()}">
-                    <tr style="border-bottom: 1px solid #000000;">
-                        <th scope="row">
-                            <span data-bind="text: User_ID"></span>
-                        </th>
-                        <td>
-                            <span data-bind="text: UserName"></span>
-                        </td>
-                        <td>
-                            <span data-bind="if: IsOnline">Да</span>
-                            <span data-bind="ifnot: IsOnline">Нет</span>
+        <!-- Табы -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id='usersOnline' aria-current="page" href="#">Пользователи онлайн</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="groups">Мои Группы</a>
+            </li>
+        </ul>
+        <!-- Спрятанный инпут для сохранения активного таба -->
+        <input type="hidden" data-active="usersOnline" class="activeTab" />
 
-                        </td>
-                        <td>
-                            <button data-bind="event: { click: $parent.btnClickHandler }" type="button" class="btn btn-primary"
-                                    data-toggle="modal" data-target="#exampleModalCenter">
-                                Написать
+        <!-- Таблица для отображения онлайн пользователей -->
+        <div data-bind="visible:isUsersBlockActive" class="usersOnlineBlock">
+            <div class="tableBlock mt-5">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Пользователя</th>
+                            <th scope="col">Имя Пользователя</th>
+                            <th scope="col">Онлайн</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: {data:users()}">
+                        <tr style="border-bottom: 1px solid #000000;">
+                            <th scope="row">
+                                <span data-bind="text: User_ID"></span>
+                            </th>
+                            <td>
+                                <span data-bind="text: UserName"></span>
+                            </td>
+                            <td>
+                                <span data-bind="if: IsOnline">Да</span>
+                                <span data-bind="ifnot: IsOnline">Нет</span>
+
+                            </td>
+                            <td>
+                                <button data-bind="event: { click: $parent.btnClickHandler }" type="button" class="btn btn-primary"
+                                        data-toggle="modal" data-target="#sendChatMessage">
+                                    Написать
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Модалка для отправки личных сообщений -->
+            <div class="modal sendChatMessageModal fade" id="sendChatMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle" data-bind="text:activeChatUserName"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event: { click: closeBtnHandler }">
+                                <span aria-hidden="true">&times;</span>
                             </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        @*<div class="chatBlock" data-bind="visible: isMessageBlockActive">
-            <div class="chatBlock__header">
-                <button class="closeBtn" data-bind="event: { click: closeBtnHandler }">Закрыть</button>
-                <h2 data-bind="text:activeChatUserName"></h2>
-            </div>
-            <div data-bind="foreach: {data:messages()}" class="messages">
-                <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
-            </div>
-            <div class="typeMessageBlock">
-                <input type="text" class="messageText" data-bind="value:message" />
-                <button class="sendMessage">Отправить</button>
-            </div>
-        </div>*@
-
-
-        @*<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bind="visible: isSnackBarActive">
-            <div class="toast-header">
-                <img src="..." class="rounded mr-2" alt="...">
-                <small class="text-muted">только что</small>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="toast-body">
-                Какое-то сообщение
-            </div>
-        </div>*@
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
-             data-bind="visible: isMessageBlockActive">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle" data-bind="text:activeChatUserName"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event: { click: closeBtnHandler }">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body messages" data-bind="foreach: {data:messages()}">
-                        <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="text" class="form-control messageText" placeholder="Напишите сообщение" data-bind="value:message" />
-                        <button class="btn btn-primary sendMessage">Отправить</button>
+                        </div>
+                        <div class="modal-body messages" data-bind="foreach: {data:messages()}">
+                            <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" class="form-control messageText" placeholder="Напишите сообщение" data-bind="value:message" />
+                            <button class="btn btn-primary sendMessage" data-bind="disable:isBtnDisabled">Отправить</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
+        <div class="groupsBlock" data-bind="visible: groupsBlockActive">
+            <!-- Кнопка для открытия модалки создания группы -->
+            <div class="text-right mt-3 mr-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createGroupModal">Создать новую группу</button>
+            </div>
+            <!-- Таблица для отображения групп пользователя -->
+            <div class="tableBlock mt-5 table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Группы</th>
+                            <th scope="col">Название группы</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: {data:groups()}">
+                        <tr style="border-bottom: 1px solid #000000;">
+                            <th scope="row">
+                                <span data-bind="text: Group_ID"></span>
+                            </th>
+                            <td>
+                                <span data-bind="text: Group_Name"></span>
+                            </td>
+                            <td>
+                                <button data-bind="event:{click:$parent.openGroupModalBtnHandler}" type="button" class="btn btn-primary"
+                                        data-toggle="modal" data-target="#groupSendMessageModal">
+                                    Открыть
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Модалка для отправки сообщений в группу -->
+            <div class="modal groupSendMessageModal fade" id="groupSendMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div>
+                                <h5 class="modal-title" id="exampleModalCenterTitle" data-bind="text:activeGroupName"></h5>
+                                <p>Количество участников: <span data-bind="text:groupMembers().length"></span></p>
+                            </div>
+                            <button type="button" class="btn btn-primary mt-3 ml-5"
+                                    data-dismiss="modal" aria-label="Close"
+                                    data-toggle="modal" data-target="#groupAddUserModal">
+                                Добавить участника
+                            </button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event: { click: closeGroupSendMessageModalHandler }">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body messages" data-bind="foreach: {data:groupMessages()}">
+                            <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" class="form-control groupMessageText" placeholder="Напишите сообщение" data-bind="value:groupMessage" />
+                            <button class="btn btn-primary sendGroupMessage" data-bind="enable:groupSendMessageBtnActive">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Модалка для добавления нового пользователя в группу -->
+            <div class="modal groupAddUserModal fade" id="groupAddUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+                 >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div>
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Выберите нового участника</h5>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event:"
+                                    data-toggle="modal" data-target="#groupSendMessageModal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <select class="form-select addUserSelect w-100" aria-label=".form-select-lg example" 
+                                    data-bind="options:users,optionsText:'UserName',value:selectedUserId">
+                             </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary sendGroupMessage" data-bind="enable:addNewUserBtnActive">Добавить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Модалка для создания новой группы -->
+            <div class="modal createGroupModal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Окно создания группы</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="event:{click:closeCreateGroupModalHandler}">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body d-flex flex-column justify-content-between">
+                            <input type="text" class="form-control groupName" placeholder="Введите название группы" data-bind="value:newGroupName" />
+                            <button class="btn btn-primary createGroupBtn mt-3"
+                                    data-bind="enable:isCreateBtnActive">
+                                Создать
+                            </button>
+                            <div data-bind="visible:createGroupAlertActive" class="mt-3">
+                                <div class="alert alert-danger" role="alert" data-bind="text:alertText">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SnackBar для уведомления пользователя о получении новых сообщений -->
         <div aria-live="polite" aria-atomic="true" style="position: absolute; left: 0; bottom: 0; min-height: 200px;width:400px; display:flex;
                      justify-content:center;align-items:center;
                  ">
             <div class="toast bg-info">
                 <div class="toast-header">
-                    <strong class="mr-auto" >
-                        У вас новое сообщение от: 
+                    <strong class="mr-auto">
+                        У вас новое сообщение от:
                         <span data-bind="text:messageFromUser"></span>
                     </strong>
                     <small>Только что</small>
@@ -130,15 +233,6 @@
                 </div>
             </div>
         </div>
-
-        @*<div class="snackBar" >
-            <p>
-                У вас новое сообщение от пользователя:
-                <span data-bind="text:messageFromUser"></span>
-            <p>
-        </div>*@
-
-
     </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
@@ -167,7 +261,26 @@
             mainUserName: ko.observable(""),
             message: ko.observable(""),
             messageFromUser: ko.observable(""),
-            receivedMessage:ko.observable("")
+            receivedMessage: ko.observable(""),
+            isBtnDisabled: ko.observable(true),
+            isUsersBlockActive: ko.observable(true),
+            groupsBlockActive: ko.observable(false),
+            groups: ko.observableArray(),
+            closeCreateGroupModalHandler: closeCreateGroupModalHandler,
+            newGroupName: ko.observable(""),
+            isCreateBtnActive: ko.observable(false),
+            createGroupAlertActive: ko.observable(false),
+            alertText: ko.observable(""),
+            activeGroupName: ko.observable(""),
+            activeGroupID: ko.observable(0),
+            groupMessages: ko.observableArray(),
+            groupMembers: ko.observableArray(),
+            groupMessage: ko.observable(""),
+            groupSendMessageBtnActive: ko.observable(false),
+            openGroupModalBtnHandler: openGroupModalBtnHandler,
+            closeGroupSendMessageModalHandler: closeGroupSendMessageModalHandler,
+            addNewUserBtnActive: ko.observable(false),
+            selectedUserId : ko.observable(0)
         };
 
         const messagesBlock = document.querySelector('.messages')
@@ -191,6 +304,12 @@
             self.IsRead = ko.observable(messageData.Is_Read)
             self.Message = ko.observable(messageData.Message)
             return self
+        }
+
+        const Group = function (groupData) {
+            const self = this
+            self.Group_ID = groupData.Group_ID
+            self.Group_Name = groupData.Group_Name
         }
 
 
@@ -226,10 +345,64 @@
             viewModel.messages.removeAll()
         }
 
+        function closeCreateGroupModalHandler() {
+            viewModel.alertText("")
+            viewModel.createGroupAlertActive(false)
+            viewModel.newGroupName("")
+            viewModel.isCreateBtnActive(false)
+        }
+
+        function closeGroupSendMessageModalHandler() {
+            viewModel.activeGroupName("")
+            viewModel.activeGroupID(0)
+            viewModel.groupMessage("")
+            viewModel.groupMessages.removeAll()
+            viewModel.groupMembers.removeAll()
+        }
+
+        function openGroupModalBtnHandler(data) {
+            viewModel.activeGroupID(data.Group_ID)
+            viewModel.activeGroupName(data.Group_Name)
+            // запрос для получения сообщений группы
+            $.ajax({
+                url: "/Chat/GetGroupMessages",
+                method: "POST",
+                data: { "groupID": viewModel.activeGroupID()}
+            }).done(function (messages) {
+                messages.forEach(function (message) {
+                    viewModel.groupMessages.push(new Message(message))
+                })
+                // запрос для получения членов группы
+                $.ajax({
+                    url: "/Chat/GetGroupMembers",
+                    method: "POST",
+                    data: { "groupID": viewModel.activeGroupID() }
+                }).done(function (users) {
+                    users.forEach(function (user) {
+                        viewModel.groupMembers.push(new User(user))
+                    })
+                })
+            })
+
+        }
+
         const chat = $.connection.myHub1;
         chat.client.onConnected = function (user) {
             viewModel.users.push(new User(user))
         }
+
+        chat.client.sendGroupMessage = function (message) {
+            console.log(message)
+        }
+
+        chat.client.addedToNewGroup = function (groupName) {
+            console.log(groupName)
+        }
+
+        chat.client.addedNewMember = function (user) {
+            console.log(user)
+        }
+
 
         chat.client.newMessageFromUser = function (message, FromUserID, fromUserName) {
             if (viewModel.activeChatID() === FromUserID) {
@@ -249,6 +422,8 @@
             viewModel.message("")
         }
 
+      
+
         chat.client.onUserDisconnected = function (user) {
             viewModel.users.remove(function (u) {
                 return u.User_ID() == user.User_ID
@@ -264,37 +439,145 @@
             viewModel.mainUserName(username.value)
         }
         if (viewModel.isAuth() === true) {
+            // Запрос для получения всех пользователей онлайн,кроме текущего
             $.ajax({
                 url: "/Chat/GetUsers",
                 type: "POST",
                 data: { "mainUserID": viewModel.mainUserID() },
-                success: function (data) {
-                    data.forEach(user => {
+                success: function (users) {
+                    users.forEach(user => {
                         viewModel.users.push(new User(user));
                     })
-                    $.connection.hub.start().done(function () {
-                        chat.server.connect(viewModel.mainUserName());
-                        document.querySelector('.sendMessage').addEventListener('click', function () {
-                            const userId = document.querySelector(".hiddenUserId")
-                            chat.server.sendMessage(viewModel.activeChatID(), viewModel.message(), Number(userId.value), viewModel.activeChatConnectionID(), viewModel.mainUserName())
-                        })
+
+                    // Запрос для получения групп пользователя
+                    $.ajax({
+                        url: '/Chat/GetUserGroups',
+                        type: "POST",
+                        data: { "mainUserID": viewModel.mainUserID() },
+                        success: function (groups) {
+                            $.connection.hub.start().done(function () {
+                                chat.server.connect(viewModel.mainUserName());
+
+                                // отправляем личное сообщение
+                                document.querySelector('.sendMessage').addEventListener('click', function () {
+                                    const userId = document.querySelector(".hiddenUserId")
+                                    chat.server.sendMessage(viewModel.activeChatID(), viewModel.message(), Number(userId.value), viewModel.activeChatConnectionID(), viewModel.mainUserName())
+                                })
+
+                                // отправляем сообщение группе
+                                document.querySelector('.sendGroupMessage').addEventListener('click', function () {
+                                    chat.server.sendGroupMessage(viewModel.groupMessage(),viewModel.activeGroupName())
+                                })
+
+                                // подключаемся к каждой группе
+                                groups.forEach((group) => {
+                                    viewModel.groups.push(new Group(group))
+                                    chat.server.connectToGroup(group.Group_Name);
+                                })
+
+                                // Запрос для создания новой группы 
+                                const createGroupBtn = document.querySelector('.createGroupBtn')
+                                createGroupBtn.addEventListener('click', function () {
+                                    $.ajax({
+                                        url: '/Chat/CreateNewGroup',
+                                        type: "POST",
+                                        data: { "userId": viewModel.mainUserID(), "groupName": viewModel.newGroupName() }
+                                    }).done(function (data) {
+                                        viewModel.createGroupAlertActive(true)
+                                        console.log(data)
+                                        if (data.hasError === true) {
+                                            viewModel.alertText(data.message)
+                                        } else {
+                                            viewModel.alertText("Вы успешно создали новую группу")
+                                            viewModel.groups.push(new Group(data))
+                                            chat.server.connectToGroup(data.Group_Name)
+                                        }
+                                        viewModel.newGroupName("")
+                                        viewModel.isCreateBtnActive(false)
+                                        setTimeout(() => {
+                                            viewModel.createGroupAlertActive(false)
+                                            viewModel.alertText("")
+                                        }, 2000)
+                                    })
+                                })
+                            })
+                        }
                     })
                 }
             })
+           
         }
 
+        // Для сброса данных форм
         document.addEventListener('click', function (e) {
-            if (e.target.classList[0] === 'modal') {
+            if (e.target.classList[1] === 'sendChatMessageModal') {
                 viewModel.closeBtnHandler()
+            } else if (e.target.classList[1] === 'createGroupModal') {
+                viewModel.closeCreateGroupModalHandler()
             }
         })
 
+        // Настройки для уведомления
         $(".toast").toast({
             animation: true,
             autohide: true,
             delay: 5000
         })
 
+        // Для активации/деактивации кнопки отправки сообщения
+        messageText.addEventListener('input', function (e) {
+            if (e.target.value !== "") {
+                viewModel.isBtnDisabled(false)
+            } else {
+                viewModel.isBtnDisabled(true)
+            }
+        })
+
+        // Для переключения табов и их активации
+        const activeTab = document.querySelector(".activeTab")
+        document.querySelectorAll('.nav-item').forEach((navItem) => {
+            navItem.addEventListener('click', function (e) {
+                const navId = e.target.getAttribute("id")
+                if (navId !== activeTab.dataset.active) {
+                    e.target.classList.add('active')
+                    const previousActiveElement = document.querySelector(`#${activeTab.dataset.active}`)
+                    previousActiveElement.classList.remove('active')
+                    activeTab.dataset.active = navId
+                    if (navId === 'usersOnline') {
+                        viewModel.isUsersBlockActive(true)
+                        viewModel.groupsBlockActive(false)
+                    } else {
+                        viewModel.groupsBlockActive(true)
+                        viewModel.isUsersBlockActive(false)
+                    }
+                } 
+            })
+        })
+
+        // Для активации/деактивации кнопки создания группы
+        const groupName = document.querySelector('.groupName')
+        groupName.addEventListener('input', function (e) {
+            if (e.target.value !== "") {
+                viewModel.isCreateBtnActive(true)
+            } else {
+                viewModel.isCreateBtnActive(false)
+            }
+        })
+
+        document.querySelector('.groupMessageText').addEventListener('input', function (e) {
+            if (e.target.value !== "") {
+                viewModel.groupSendMessageBtnActive(true)
+            } else {
+                viewModel.groupSendMessageBtnActive(false)
+            }
+        })
+
+        document.querySelector('.addUserSelect').addEventListener('change', function (e) {
+            console.log(viewModel.selectedUserId())
+            viewModel.addNewUserBtnActive(true)
+        })
+
+        
         ko.applyBindings(viewModel);
     </script>
 </body>

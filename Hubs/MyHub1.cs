@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNet.SignalR;
 using ASP_chat.ChatService;
+using ASP_chat.GroupsService;
 
 namespace ASP_chat.Hubs
 {
     public class MyHub1 : Hub
     {
         ChatServiceClient ChatServiceClient = new ChatServiceClient();
+        GroupsClient GroupsClient = new GroupsClient();
         // Отправка сообщений
         public void SendMessage(int toUser_ID,string message,int From_User_ID,string toConnection_ID,string fromUserName)
         {
-            messages newMessage = ChatServiceClient.SendMessage(toUser_ID, message, From_User_ID);
+            ChatService.messages newMessage = ChatServiceClient.SendMessage(toUser_ID, message, From_User_ID);
             Clients.Caller.writeNewMessage(newMessage);
             Clients.Client(toConnection_ID).newMessageFromUser(newMessage, From_User_ID, fromUserName);
         }
@@ -18,7 +20,7 @@ namespace ASP_chat.Hubs
         public void Connect(string userName)
         {
             string connectionId = Context.ConnectionId;
-            users user = ChatServiceClient.ClientConnected(userName, connectionId);
+            ChatService.users user = ChatServiceClient.ClientConnected(userName, connectionId);
             Clients.Others.onConnected(user);
         }
 
@@ -26,9 +28,29 @@ namespace ASP_chat.Hubs
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
             string connectionId = Context.ConnectionId;
-            users user = ChatServiceClient.ClientDisconnected(connectionId);
+            ChatService.users user = ChatServiceClient.ClientDisconnected(connectionId);
             Clients.All.onUserDisconnected(user);
             return base.OnDisconnected(stopCalled);
+        }
+
+        public void ConnectToGroup(string groupName) 
+        {
+            string connectionID = Context.ConnectionId;
+            Groups.Add(connectionID, groupName);
+        }
+
+        public void SendGroupMessage(string message, string groupName,int groupId,int fromUserID) 
+        {
+            GroupsService.messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
+            Clients.Group(groupName).sendGroupMessage(newMessage);
+        }
+
+        public void AddNewMemberToGroup(string groupName,int groupId,int userId)
+        {
+            GroupsService.users newUser = GroupsClient.AddUserToGroup(userId, groupId);
+            Groups.Add(newUser.Connection_Id, groupName);
+            Clients.Client(newUser.Connection_Id).addedToNewGroup(groupName);
+            Clients.Group(groupName,newUser.Connection_Id).addedNewMember(newUser);
         }
     }
 }
