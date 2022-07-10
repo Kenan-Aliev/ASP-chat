@@ -40,6 +40,9 @@
   <wsdl:message name="IGroups_AddUserToGroup_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToGroupResponse" />
   </wsdl:message>
+  <wsdl:message name="IGroups_AddUserToGroup_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService1" name="detail" element="q2:ServiceError" />
+  </wsdl:message>
   <wsdl:message name="IGroups_GetGroupMembers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetGroupMembers" />
   </wsdl:message>
@@ -67,6 +70,7 @@
     <wsdl:operation name="AddUserToGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IGroups/AddUserToGroup" message="tns:IGroups_AddUserToGroup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGroups/AddUserToGroupResponse" message="tns:IGroups_AddUserToGroup_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGroups/AddUserToGroupServiceErrorFault" name="ServiceErrorFault" message="tns:IGroups_AddUserToGroup_ServiceErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetGroupMembers">
       <wsdl:input wsaw:Action="http://tempuri.org/IGroups/GetGroupMembers" message="tns:IGroups_GetGroupMembers_InputMessage" />
@@ -122,6 +126,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetGroupMembers">
       <soap:operation soapAction="http://tempuri.org/IGroups/GetGroupMembers" style="document" />

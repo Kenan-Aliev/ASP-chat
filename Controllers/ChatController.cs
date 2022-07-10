@@ -67,6 +67,19 @@ namespace ASP_chat.Controllers
             return Json(members, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult AddNewUserToGroup(int groupId, int userId) 
+        {
+            try {
+                GroupsService.users newUser = groupsClient.AddUserToGroup(userId, groupId);
+                return Json(newUser, JsonRequestBehavior.AllowGet);
+            }
+            catch (FaultException<ServiceError> ex)
+            {
+                return Json(new { hasError = true, message = ex.Detail.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
     }
 }

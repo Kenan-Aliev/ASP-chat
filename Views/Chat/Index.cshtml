@@ -149,8 +149,9 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body messages" data-bind="foreach: {data:groupMessages()}">
-                            <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }"></p>
+                        <div class="modal-body groupMessages messages" data-bind="foreach: {data:groupMessages()}">
+                            <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }">
+                            </p>
                         </div>
                         <div class="modal-footer">
                             <input type="text" class="form-control groupMessageText" placeholder="Напишите сообщение" data-bind="value:groupMessage" />
@@ -175,12 +176,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <select class="form-select addUserSelect w-100" aria-label=".form-select-lg example" 
+                            <select class="form-select addUserSelect w-100" aria-label=".form-select-lg example"
                                     data-bind="options:users,optionsText:'UserName',value:selectedUserId">
-                             </select>
+                            </select>
+                            <div class="alert alert-warning mt-3" role="alert" data-bind="visible:addNewUserAlertActive,text:addNewUserAlertMessage">
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary sendGroupMessage" data-bind="enable:addNewUserBtnActive">Добавить</button>
+                            <button class="btn btn-primary addNewUserToGroup">Добавить</button>
                         </div>
                     </div>
                 </div>
@@ -219,9 +222,7 @@
                  ">
             <div class="toast bg-info">
                 <div class="toast-header">
-                    <strong class="mr-auto">
-                        У вас новое сообщение от:
-                        <span data-bind="text:messageFromUser"></span>
+                    <strong class="mr-auto" data-bind="text:notificationText">
                     </strong>
                     <small>Только что</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -260,7 +261,6 @@
             mainUserID: ko.observable(0),
             mainUserName: ko.observable(""),
             message: ko.observable(""),
-            messageFromUser: ko.observable(""),
             receivedMessage: ko.observable(""),
             isBtnDisabled: ko.observable(true),
             isUsersBlockActive: ko.observable(true),
@@ -279,12 +279,16 @@
             groupSendMessageBtnActive: ko.observable(false),
             openGroupModalBtnHandler: openGroupModalBtnHandler,
             closeGroupSendMessageModalHandler: closeGroupSendMessageModalHandler,
-            addNewUserBtnActive: ko.observable(false),
-            selectedUserId : ko.observable(0)
+            selectedUserId: ko.observable(0),
+            addNewUserAlertActive: ko.observable(false),
+            addNewUserAlertMessage: ko.observable(""),
+            snackBarMessageType: ko.observable(''),
+            notificationText: ko.observable("")
         };
 
         const messagesBlock = document.querySelector('.messages')
         const messageText = document.querySelector('.messageText')
+        const groupMessagesBlock = document.querySelector('.groupMessages')
 
         const User = function (userData) {
             const self = this
@@ -303,6 +307,7 @@
             self.Send_Date = ko.observable(messageData.Send_Date)
             self.IsRead = ko.observable(messageData.Is_Read)
             self.Message = ko.observable(messageData.Message)
+            self.From_UserName = ko.observable(messageData.From_UserName)
             return self
         }
 
@@ -356,6 +361,7 @@
             viewModel.activeGroupName("")
             viewModel.activeGroupID(0)
             viewModel.groupMessage("")
+            viewModel.groupSendMessageBtnActive(false)
             viewModel.groupMessages.removeAll()
             viewModel.groupMembers.removeAll()
         }
@@ -391,18 +397,46 @@
             viewModel.users.push(new User(user))
         }
 
-        chat.client.sendGroupMessage = function (message) {
-            console.log(message)
+        chat.client.sendGroupMessage = function (message,groupId,groupName,fromUserID) {
+            if (viewModel.activeGroupID() === groupId) {
+                if (fromUserID !== viewModel.mainUserID()) {
+                    let username = ""
+                    for (let i = 0; i < viewModel.groupMembers().length; i++) {
+                        if (viewModel.groupMembers()[i].User_ID() === fromUserID) {
+                            username = viewModel.groupMembers()[i].UserName()
+                            break
+                        }
+                    }
+                    message.From_UserName = username
+                    viewModel.groupMessages.push(new Message(message))
+                } else {
+                    viewModel.groupMessages.push(new Message(message))
+                }
+                groupMessagesBlock.scrollTop = groupMessagesBlock.scrollHeight
+            } else {
+                viewModel.notificationText("Новое сообщение в группе: " + groupName)
+                viewModel.receivedMessage(message.Message)
+                $('.toast').toast('show')
+            }
         }
 
-        chat.client.addedToNewGroup = function (groupName) {
-            console.log(groupName)
+        chat.client.addedToNewGroup = function (group) {
+            viewModel.groups.push(new Group(group))
+            viewModel.notificationText("Вы были добавлены в новую группу: " + group.Group_Name)
+            viewModel.receivedMessage("")
+            $('.toast').toast('show')
         }
 
-        chat.client.addedNewMember = function (user) {
-            console.log(user)
+        chat.client.addedNewMember = function (user, groupID,groupName) {
+            if (viewModel.activeGroupID === groupID) {
+                viewModel.groupMembers.push(new User(user))
+            }
+            viewModel.notificationText("Был добавлен новый пользователь в группу: " + groupName)
+            viewModel.receivedMessage("Имя пользователя:" + user.UserName)
+            $('.toast').toast('show')
         }
 
+       
 
         chat.client.newMessageFromUser = function (message, FromUserID, fromUserName) {
             if (viewModel.activeChatID() === FromUserID) {
@@ -410,7 +444,7 @@
                 messagesBlock.scrollTop = messagesBlock.scrollHeight
             }
             else {
-                viewModel.messageFromUser(fromUserName)
+                viewModel.notificationText("У вас новое сообщение от пользователя: " + fromUserName)
                 viewModel.receivedMessage(message.Message)
                 $('.toast').toast('show')
             }
@@ -466,8 +500,36 @@
 
                                 // отправляем сообщение группе
                                 document.querySelector('.sendGroupMessage').addEventListener('click', function () {
-                                    chat.server.sendGroupMessage(viewModel.groupMessage(),viewModel.activeGroupName())
+                                    chat.server.sendGroupMessage(viewModel.groupMessage(), viewModel.activeGroupName(), viewModel.activeGroupID(), viewModel.mainUserID());
+                                    viewModel.groupMessage("")
+                                    viewModel.groupSendMessageBtnActive(false)
+                                    groupMessagesBlock.scrollTop = groupMessagesBlock.scrollHeight
                                 })
+
+                                // добавляем нового участника в группу
+                                document.querySelector('.addNewUserToGroup').addEventListener('click', function () {
+                                    $.ajax({
+                                        url: "/Chat/AddNewUserToGroup",
+                                        method: "POST",
+                                        data: { "groupId": viewModel.activeGroupID(), "userId": viewModel.selectedUserId().User_ID()}
+                                    }).done(function (data) {
+                                        if (data.hasError === true) {
+                                            viewModel.addNewUserAlertMessage(data.message)
+                                            console.log(data)
+                                        } else {
+                                            viewModel.groupMembers.push(new User(data))
+                                            viewModel.addNewUserAlertMessage("Вы успешно добавили нового участника в группу")
+                                            chat.server.addNewMemberToGroup(viewModel.activeGroupName(), viewModel.activeGroupID(), data)
+                                        }
+                                        viewModel.addNewUserAlertActive(true)
+                                        setTimeout(function () {
+                                            viewModel.addNewUserAlertActive(false)
+                                            viewModel.addNewUserAlertMessage("")
+                                        }, 3000)
+                                    })
+                                })
+
+                                
 
                                 // подключаемся к каждой группе
                                 groups.forEach((group) => {
@@ -514,6 +576,10 @@
                 viewModel.closeBtnHandler()
             } else if (e.target.classList[1] === 'createGroupModal') {
                 viewModel.closeCreateGroupModalHandler()
+            }
+            else if (e.target.classList[1] === 'groupSendMessageModal' || e.target.classList[1] === "groupAddUserModal") {
+                viewModel.closeGroupSendMessageModalHandler()
+                viewModel.selectedUserId(0)
             }
         })
 
@@ -572,10 +638,9 @@
             }
         })
 
-        document.querySelector('.addUserSelect').addEventListener('change', function (e) {
-            console.log(viewModel.selectedUserId())
-            viewModel.addNewUserBtnActive(true)
-        })
+     
+
+      
 
         
         ko.applyBindings(viewModel);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using ASP_chat.ChatService;
 using ASP_chat.GroupsService;
+using System.ServiceModel;
 
 namespace ASP_chat.Hubs
 {
@@ -42,15 +43,14 @@ namespace ASP_chat.Hubs
         public void SendGroupMessage(string message, string groupName,int groupId,int fromUserID) 
         {
             GroupsService.messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
-            Clients.Group(groupName).sendGroupMessage(newMessage);
+            Clients.Group(groupName).sendGroupMessage(newMessage,groupId,groupName,fromUserID);
         }
-
-        public void AddNewMemberToGroup(string groupName,int groupId,int userId)
+        
+        public void AddNewMemberToGroup(string groupName,int groupId,GroupsService.users newUser)
         {
-            GroupsService.users newUser = GroupsClient.AddUserToGroup(userId, groupId);
             Groups.Add(newUser.Connection_Id, groupName);
-            Clients.Client(newUser.Connection_Id).addedToNewGroup(groupName);
-            Clients.Group(groupName,newUser.Connection_Id).addedNewMember(newUser);
+            Clients.Client(newUser.Connection_Id).addedToNewGroup(new { Group_ID = groupId , Group_Name = groupName });
+            Clients.Group(groupName, newUser.Connection_Id, Context.ConnectionId).addedNewMember(newUser, groupId,groupName);
         }
     }
 }

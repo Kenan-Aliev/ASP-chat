@@ -793,6 +793,7 @@ namespace ASP_chat.GroupsService {
         System.Threading.Tasks.Task<ASP_chat.GroupsService.messages[]> GetGroupMessagesAsync(int groupId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroups/AddUserToGroup", ReplyAction="http://tempuri.org/IGroups/AddUserToGroupResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ASP_chat.GroupsService.ServiceError), Action="http://tempuri.org/IGroups/AddUserToGroupServiceErrorFault", Name="ServiceError", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
         ASP_chat.GroupsService.users AddUserToGroup(int userID, int groupID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroups/AddUserToGroup", ReplyAction="http://tempuri.org/IGroups/AddUserToGroupResponse")]
