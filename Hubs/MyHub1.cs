@@ -43,7 +43,7 @@ namespace ASP_chat.Hubs
         public void SendGroupMessage(string message, string groupName,int groupId,int fromUserID) 
         {
             GroupsService.messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
-            Clients.Group(groupName).sendGroupMessage(newMessage,groupId,groupName,fromUserID);
+            Clients.Group(groupName).sendGroupMessage(newMessage,groupId,groupName);
         }
         
         public void AddNewMemberToGroup(string groupName,int groupId,GroupsService.users newUser)

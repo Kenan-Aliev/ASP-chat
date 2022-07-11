@@ -150,8 +150,10 @@
                             </button>
                         </div>
                         <div class="modal-body groupMessages messages" data-bind="foreach: {data:groupMessages()}">
-                            <p class="message" data-bind="text: Message,style: { textAlign: From_User() == $root.mainUserID() ? 'right' : 'left' }">
-                            </p>
+                            <div class="message"  data-bind="style:{ textAlign: From_User() === $root.mainUserID() ? 'right' : 'left' }">
+                                <span data-bind="text: From_UserName" style="font-weight:bold"></span>:
+                                <span data-bind="text:Message"></span>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="text" class="form-control groupMessageText" placeholder="Напишите сообщение" data-bind="value:groupMessage" />
@@ -308,6 +310,7 @@
             self.IsRead = ko.observable(messageData.Is_Read)
             self.Message = ko.observable(messageData.Message)
             self.From_UserName = ko.observable(messageData.From_UserName)
+            self.Group_ID = ko.observable(messageData.Group_ID)
             return self
         }
 
@@ -397,21 +400,9 @@
             viewModel.users.push(new User(user))
         }
 
-        chat.client.sendGroupMessage = function (message,groupId,groupName,fromUserID) {
+        chat.client.sendGroupMessage = function (message, groupId, groupName) {
             if (viewModel.activeGroupID() === groupId) {
-                if (fromUserID !== viewModel.mainUserID()) {
-                    let username = ""
-                    for (let i = 0; i < viewModel.groupMembers().length; i++) {
-                        if (viewModel.groupMembers()[i].User_ID() === fromUserID) {
-                            username = viewModel.groupMembers()[i].UserName()
-                            break
-                        }
-                    }
-                    message.From_UserName = username
-                    viewModel.groupMessages.push(new Message(message))
-                } else {
-                    viewModel.groupMessages.push(new Message(message))
-                }
+                viewModel.groupMessages.push(new Message(message))
                 groupMessagesBlock.scrollTop = groupMessagesBlock.scrollHeight
             } else {
                 viewModel.notificationText("Новое сообщение в группе: " + groupName)

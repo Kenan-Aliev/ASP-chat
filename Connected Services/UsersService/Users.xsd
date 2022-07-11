@@ -47,6 +47,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Chat_ID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="From_User" type="xs:int" />
+      <xs:element minOccurs="0" name="From_UserName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Group_ID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IsRead" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
@@ -75,9 +76,9 @@
   <xs:element name="ArrayOfgroups_users" nillable="true" type="tns:ArrayOfgroups_users" />
   <xs:complexType name="groups_users">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Group_ID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Group_ID" type="xs:int" />
       <xs:element minOccurs="0" name="Groups_Users_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="User_ID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="User_ID" type="xs:int" />
       <xs:element minOccurs="0" name="groups" nillable="true" type="tns:groups" />
       <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
     </xs:sequence>

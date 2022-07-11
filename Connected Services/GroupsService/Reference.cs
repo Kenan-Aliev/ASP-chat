@@ -116,13 +116,13 @@ namespace ASP_chat.GroupsService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> Group_IDField;
+        private int Group_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int Groups_Users_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> User_IDField;
+        private int User_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ASP_chat.GroupsService.groups groupsField;
@@ -141,7 +141,7 @@ namespace ASP_chat.GroupsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Group_ID {
+        public int Group_ID {
             get {
                 return this.Group_IDField;
             }
@@ -167,7 +167,7 @@ namespace ASP_chat.GroupsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> User_ID {
+        public int User_ID {
             get {
                 return this.User_IDField;
             }
@@ -231,6 +231,9 @@ namespace ASP_chat.GroupsService {
         private int From_UserField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string From_UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> Group_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -286,6 +289,19 @@ namespace ASP_chat.GroupsService {
                 if ((this.From_UserField.Equals(value) != true)) {
                     this.From_UserField = value;
                     this.RaisePropertyChanged("From_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string From_UserName {
+            get {
+                return this.From_UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.From_UserNameField, value) != true)) {
+                    this.From_UserNameField = value;
+                    this.RaisePropertyChanged("From_UserName");
                 }
             }
         }
