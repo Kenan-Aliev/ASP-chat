@@ -1,18 +1,34 @@
 ﻿using Microsoft.AspNet.SignalR;
-using ASP_chat.ChatService;
-using ASP_chat.GroupsService;
 using System.ServiceModel;
+using System.Configuration;
+using WcfService1;
+using WcfService1.ChatUOW.Entities;
 
 namespace ASP_chat.Hubs
 {
     public class MyHub1 : Hub
     {
-        ChatServiceClient ChatServiceClient = new ChatServiceClient();
-        GroupsClient GroupsClient = new GroupsClient();
+        
+        static BasicHttpBinding binding = new BasicHttpBinding();
+
+        // chat channel
+        static string chatUrl = ConfigurationManager.AppSettings["ChatService"];
+        static EndpointAddress chatAddress = new EndpointAddress(chatUrl);
+        static ChannelFactory<IChatService> chatFactory = new ChannelFactory<IChatService>(binding, chatAddress);
+        IChatService chatChannel = chatFactory.CreateChannel();
+
+        // groups channel
+        static string groupUrl = ConfigurationManager.AppSettings["GroupsService"];
+        static EndpointAddress groupsAddress = new EndpointAddress(groupUrl);
+        static ChannelFactory<IGroups> groupsFactory = new ChannelFactory<IGroups>(binding, groupsAddress);
+        IGroups groupsChannel = groupsFactory.CreateChannel();
+
+        //ChatServiceClient ChatServiceClient = new ChatServiceClient();
+        //GroupsClient GroupsClient = new GroupsClient();
         // Отправка сообщений
         public void SendMessage(int toUser_ID,string message,int From_User_ID,string toConnection_ID,string fromUserName)
         {
-            ChatService.Messages newMessage = ChatServiceClient.SendMessage(toUser_ID, message, From_User_ID);
+            Messages newMessage = chatChannel.SendMessage(toUser_ID, message, From_User_ID);
             Clients.Caller.writeNewMessage(newMessage);
             Clients.Client(toConnection_ID).newMessageFromUser(newMessage, From_User_ID, fromUserName);
         }
@@ -21,7 +37,7 @@ namespace ASP_chat.Hubs
         public void Connect(string userName)
         {
             string connectionId = Context.ConnectionId;
-            ChatService.User user = ChatServiceClient.ClientConnected(userName, connectionId);
+            User user = chatChannel.ClientConnected(userName, connectionId);
             Clients.Others.onConnected(user);
         }
 
@@ -29,7 +45,7 @@ namespace ASP_chat.Hubs
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
             string connectionId = Context.ConnectionId;
-            ChatService.User user = ChatServiceClient.ClientDisconnected(connectionId);
+            User user = chatChannel.ClientDisconnected(connectionId);
             Clients.All.onUserDisconnected(user);
             return base.OnDisconnected(stopCalled);
         }
@@ -42,11 +58,11 @@ namespace ASP_chat.Hubs
 
         public void SendGroupMessage(string message, string groupName,int groupId,int fromUserID) 
         {
-            GroupsService.Messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
+            Messages newMessage = groupsChannel.SendMessage(groupId, fromUserID, message);
             Clients.Group(groupName).sendGroupMessage(newMessage,groupId,groupName);
         }
         
-        public void AddNewMemberToGroup(string groupName,int groupId,GroupsService.users newUser)
+        public void AddNewMemberToGroup(string groupName,int groupId,User newUser)
         {
             Groups.Add(newUser.Connection_Id, groupName);
             Clients.Client(newUser.Connection_Id).addedToNewGroup(new { Group_ID = groupId , Group_Name = groupName });

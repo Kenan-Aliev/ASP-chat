@@ -1,13 +1,22 @@
 ﻿using System;
+using System.Configuration;
 using System.ServiceModel;
 using System.Web.Mvc;
-using ASP_chat.WcfService;
+using WcfService1;
+using WcfService1.ChatUOW.Entities;
 
 namespace ASP_chat.Controllers
 {
     public class AuthController : Controller
     {
-         AuthClient authClient = new AuthClient();
+        // auth channel
+        static string url = ConfigurationManager.AppSettings["AuthService"];
+        static BasicHttpBinding binding = new BasicHttpBinding();
+        static EndpointAddress address = new EndpointAddress(url);
+        static ChannelFactory<IAuth> factory = new ChannelFactory<IAuth>(binding, address);
+        IAuth channel = factory.CreateChannel();
+
+
         // GET: Auth
         public ActionResult Registration()
         {
@@ -18,7 +27,7 @@ namespace ASP_chat.Controllers
         {
             try
             {
-                authClient.Registration(userData);
+                channel.Registration(userData);
                 ViewBag.Message = "Вы успешно зарегистрировались";
                 return View("Registration");
             }
@@ -39,7 +48,7 @@ namespace ASP_chat.Controllers
         {
             try
             {
-                User us = authClient.Login(user);
+                User us = channel.Login(user);
                 ViewBag.Message = "Вы успешно вошли в свой аккаунт";
                 return RedirectToAction("Index","Chat",us);
             }
