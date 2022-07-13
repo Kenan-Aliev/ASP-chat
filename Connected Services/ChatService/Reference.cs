@@ -15,9 +15,9 @@ namespace ASP_chat.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="users", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities")]
     [System.SerializableAttribute()]
-    public partial class users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -38,16 +38,16 @@ namespace ASP_chat.ChatService {
         private int User_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.chats[] chatsField;
+        private ASP_chat.ChatService.Chat[] chatField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.chats[] chats1Field;
+        private ASP_chat.ChatService.Chat[] chat1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.groups_users[] groups_usersField;
+        private ASP_chat.ChatService.Group_Users[] group_usersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.messages[] messagesField;
+        private ASP_chat.ChatService.Messages[] messagesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -125,46 +125,46 @@ namespace ASP_chat.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.chats[] chats {
+        public ASP_chat.ChatService.Chat[] chat {
             get {
-                return this.chatsField;
+                return this.chatField;
             }
             set {
-                if ((object.ReferenceEquals(this.chatsField, value) != true)) {
-                    this.chatsField = value;
-                    this.RaisePropertyChanged("chats");
+                if ((object.ReferenceEquals(this.chatField, value) != true)) {
+                    this.chatField = value;
+                    this.RaisePropertyChanged("chat");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.chats[] chats1 {
+        public ASP_chat.ChatService.Chat[] chat1 {
             get {
-                return this.chats1Field;
+                return this.chat1Field;
             }
             set {
-                if ((object.ReferenceEquals(this.chats1Field, value) != true)) {
-                    this.chats1Field = value;
-                    this.RaisePropertyChanged("chats1");
+                if ((object.ReferenceEquals(this.chat1Field, value) != true)) {
+                    this.chat1Field = value;
+                    this.RaisePropertyChanged("chat1");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.groups_users[] groups_users {
+        public ASP_chat.ChatService.Group_Users[] group_users {
             get {
-                return this.groups_usersField;
+                return this.group_usersField;
             }
             set {
-                if ((object.ReferenceEquals(this.groups_usersField, value) != true)) {
-                    this.groups_usersField = value;
-                    this.RaisePropertyChanged("groups_users");
+                if ((object.ReferenceEquals(this.group_usersField, value) != true)) {
+                    this.group_usersField = value;
+                    this.RaisePropertyChanged("group_users");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.messages[] messages {
+        public ASP_chat.ChatService.Messages[] messages {
             get {
                 return this.messagesField;
             }
@@ -188,9 +188,9 @@ namespace ASP_chat.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="chats", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Chat", Namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities")]
     [System.SerializableAttribute()]
-    public partial class chats : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Chat : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -205,13 +205,13 @@ namespace ASP_chat.ChatService {
         private int User_2Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.messages[] messagesField;
+        private ASP_chat.ChatService.messages1[] messagesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.users usersField;
+        private ASP_chat.ChatService.User userField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.users users1Field;
+        private ASP_chat.ChatService.User user1Field;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -263,7 +263,7 @@ namespace ASP_chat.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.messages[] messages {
+        public ASP_chat.ChatService.messages1[] messages {
             get {
                 return this.messagesField;
             }
@@ -276,27 +276,27 @@ namespace ASP_chat.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.users users {
+        public ASP_chat.ChatService.User user {
             get {
-                return this.usersField;
+                return this.userField;
             }
             set {
-                if ((object.ReferenceEquals(this.usersField, value) != true)) {
-                    this.usersField = value;
-                    this.RaisePropertyChanged("users");
+                if ((object.ReferenceEquals(this.userField, value) != true)) {
+                    this.userField = value;
+                    this.RaisePropertyChanged("user");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.users users1 {
+        public ASP_chat.ChatService.User user1 {
             get {
-                return this.users1Field;
+                return this.user1Field;
             }
             set {
-                if ((object.ReferenceEquals(this.users1Field, value) != true)) {
-                    this.users1Field = value;
-                    this.RaisePropertyChanged("users1");
+                if ((object.ReferenceEquals(this.user1Field, value) != true)) {
+                    this.user1Field = value;
+                    this.RaisePropertyChanged("user1");
                 }
             }
         }
@@ -313,9 +313,9 @@ namespace ASP_chat.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="groups_users", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Group_Users", Namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities")]
     [System.SerializableAttribute()]
-    public partial class groups_users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Group_Users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -330,10 +330,10 @@ namespace ASP_chat.ChatService {
         private int User_IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.groups groupsField;
+        private ASP_chat.ChatService.Group groupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.users usersField;
+        private ASP_chat.ChatService.User userField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -385,27 +385,232 @@ namespace ASP_chat.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.groups groups {
+        public ASP_chat.ChatService.Group group {
             get {
-                return this.groupsField;
+                return this.groupField;
             }
             set {
-                if ((object.ReferenceEquals(this.groupsField, value) != true)) {
-                    this.groupsField = value;
-                    this.RaisePropertyChanged("groups");
+                if ((object.ReferenceEquals(this.groupField, value) != true)) {
+                    this.groupField = value;
+                    this.RaisePropertyChanged("group");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.users users {
+        public ASP_chat.ChatService.User user {
             get {
-                return this.usersField;
+                return this.userField;
             }
             set {
-                if ((object.ReferenceEquals(this.usersField, value) != true)) {
-                    this.usersField = value;
-                    this.RaisePropertyChanged("users");
+                if ((object.ReferenceEquals(this.userField, value) != true)) {
+                    this.userField = value;
+                    this.RaisePropertyChanged("user");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Messages", Namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities")]
+    [System.SerializableAttribute()]
+    public partial class Messages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> Chat_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int From_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string From_UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> Group_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> IsReadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Message_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime Send_DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.Chat chatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.Group groupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.User userField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Chat_ID {
+            get {
+                return this.Chat_IDField;
+            }
+            set {
+                if ((this.Chat_IDField.Equals(value) != true)) {
+                    this.Chat_IDField = value;
+                    this.RaisePropertyChanged("Chat_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int From_User {
+            get {
+                return this.From_UserField;
+            }
+            set {
+                if ((this.From_UserField.Equals(value) != true)) {
+                    this.From_UserField = value;
+                    this.RaisePropertyChanged("From_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string From_UserName {
+            get {
+                return this.From_UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.From_UserNameField, value) != true)) {
+                    this.From_UserNameField = value;
+                    this.RaisePropertyChanged("From_UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Group_ID {
+            get {
+                return this.Group_IDField;
+            }
+            set {
+                if ((this.Group_IDField.Equals(value) != true)) {
+                    this.Group_IDField = value;
+                    this.RaisePropertyChanged("Group_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> IsRead {
+            get {
+                return this.IsReadField;
+            }
+            set {
+                if ((this.IsReadField.Equals(value) != true)) {
+                    this.IsReadField = value;
+                    this.RaisePropertyChanged("IsRead");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Message_ID {
+            get {
+                return this.Message_IDField;
+            }
+            set {
+                if ((this.Message_IDField.Equals(value) != true)) {
+                    this.Message_IDField = value;
+                    this.RaisePropertyChanged("Message_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Send_Date {
+            get {
+                return this.Send_DateField;
+            }
+            set {
+                if ((this.Send_DateField.Equals(value) != true)) {
+                    this.Send_DateField = value;
+                    this.RaisePropertyChanged("Send_Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.Chat chat {
+            get {
+                return this.chatField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.chatField, value) != true)) {
+                    this.chatField = value;
+                    this.RaisePropertyChanged("chat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.Group group {
+            get {
+                return this.groupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.groupField, value) != true)) {
+                    this.groupField = value;
+                    this.RaisePropertyChanged("group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.User user {
+            get {
+                return this.userField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.userField, value) != true)) {
+                    this.userField = value;
+                    this.RaisePropertyChanged("user");
                 }
             }
         }
@@ -424,7 +629,7 @@ namespace ASP_chat.ChatService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="messages", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
     [System.SerializableAttribute()]
-    public partial class messages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class messages1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -627,6 +832,131 @@ namespace ASP_chat.ChatService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="chats", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.SerializableAttribute()]
+    public partial class chats : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Chat_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int User_1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int User_2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.messages1[] messagesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.users usersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.users users1Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Chat_ID {
+            get {
+                return this.Chat_IDField;
+            }
+            set {
+                if ((this.Chat_IDField.Equals(value) != true)) {
+                    this.Chat_IDField = value;
+                    this.RaisePropertyChanged("Chat_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int User_1 {
+            get {
+                return this.User_1Field;
+            }
+            set {
+                if ((this.User_1Field.Equals(value) != true)) {
+                    this.User_1Field = value;
+                    this.RaisePropertyChanged("User_1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int User_2 {
+            get {
+                return this.User_2Field;
+            }
+            set {
+                if ((this.User_2Field.Equals(value) != true)) {
+                    this.User_2Field = value;
+                    this.RaisePropertyChanged("User_2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.messages1[] messages {
+            get {
+                return this.messagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.messagesField, value) != true)) {
+                    this.messagesField = value;
+                    this.RaisePropertyChanged("messages");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.users users {
+            get {
+                return this.usersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usersField, value) != true)) {
+                    this.usersField = value;
+                    this.RaisePropertyChanged("users");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.users users1 {
+            get {
+                return this.users1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.users1Field, value) != true)) {
+                    this.users1Field = value;
+                    this.RaisePropertyChanged("users1");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="groups", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
     [System.SerializableAttribute()]
     public partial class groups : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -644,7 +974,7 @@ namespace ASP_chat.ChatService {
         private ASP_chat.ChatService.groups_users[] groups_usersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ASP_chat.ChatService.messages[] messagesField;
+        private ASP_chat.ChatService.messages1[] messagesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -696,7 +1026,382 @@ namespace ASP_chat.ChatService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ASP_chat.ChatService.messages[] messages {
+        public ASP_chat.ChatService.messages1[] messages {
+            get {
+                return this.messagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.messagesField, value) != true)) {
+                    this.messagesField = value;
+                    this.RaisePropertyChanged("messages");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="users", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.SerializableAttribute()]
+    public partial class users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Connection_IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> IsOnlineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int User_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.chats[] chatsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.chats[] chats1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.groups_users[] groups_usersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.messages1[] messagesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Connection_Id {
+            get {
+                return this.Connection_IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Connection_IdField, value) != true)) {
+                    this.Connection_IdField = value;
+                    this.RaisePropertyChanged("Connection_Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> IsOnline {
+            get {
+                return this.IsOnlineField;
+            }
+            set {
+                if ((this.IsOnlineField.Equals(value) != true)) {
+                    this.IsOnlineField = value;
+                    this.RaisePropertyChanged("IsOnline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int User_ID {
+            get {
+                return this.User_IDField;
+            }
+            set {
+                if ((this.User_IDField.Equals(value) != true)) {
+                    this.User_IDField = value;
+                    this.RaisePropertyChanged("User_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.chats[] chats {
+            get {
+                return this.chatsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.chatsField, value) != true)) {
+                    this.chatsField = value;
+                    this.RaisePropertyChanged("chats");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.chats[] chats1 {
+            get {
+                return this.chats1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.chats1Field, value) != true)) {
+                    this.chats1Field = value;
+                    this.RaisePropertyChanged("chats1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.groups_users[] groups_users {
+            get {
+                return this.groups_usersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.groups_usersField, value) != true)) {
+                    this.groups_usersField = value;
+                    this.RaisePropertyChanged("groups_users");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.messages1[] messages {
+            get {
+                return this.messagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.messagesField, value) != true)) {
+                    this.messagesField = value;
+                    this.RaisePropertyChanged("messages");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="groups_users", Namespace="http://schemas.datacontract.org/2004/07/WcfService1")]
+    [System.SerializableAttribute()]
+    public partial class groups_users : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Group_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Groups_Users_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int User_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.groups groupsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.users usersField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Group_ID {
+            get {
+                return this.Group_IDField;
+            }
+            set {
+                if ((this.Group_IDField.Equals(value) != true)) {
+                    this.Group_IDField = value;
+                    this.RaisePropertyChanged("Group_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Groups_Users_ID {
+            get {
+                return this.Groups_Users_IDField;
+            }
+            set {
+                if ((this.Groups_Users_IDField.Equals(value) != true)) {
+                    this.Groups_Users_IDField = value;
+                    this.RaisePropertyChanged("Groups_Users_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int User_ID {
+            get {
+                return this.User_IDField;
+            }
+            set {
+                if ((this.User_IDField.Equals(value) != true)) {
+                    this.User_IDField = value;
+                    this.RaisePropertyChanged("User_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.groups groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.groupsField, value) != true)) {
+                    this.groupsField = value;
+                    this.RaisePropertyChanged("groups");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.users users {
+            get {
+                return this.usersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usersField, value) != true)) {
+                    this.usersField = value;
+                    this.RaisePropertyChanged("users");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Group", Namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities")]
+    [System.SerializableAttribute()]
+    public partial class Group : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int Group_IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Group_NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.Group_Users[] groups_usersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ASP_chat.ChatService.Messages[] messagesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Group_ID {
+            get {
+                return this.Group_IDField;
+            }
+            set {
+                if ((this.Group_IDField.Equals(value) != true)) {
+                    this.Group_IDField = value;
+                    this.RaisePropertyChanged("Group_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Group_Name {
+            get {
+                return this.Group_NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Group_NameField, value) != true)) {
+                    this.Group_NameField = value;
+                    this.RaisePropertyChanged("Group_Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.Group_Users[] groups_users {
+            get {
+                return this.groups_usersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.groups_usersField, value) != true)) {
+                    this.groups_usersField = value;
+                    this.RaisePropertyChanged("groups_users");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ASP_chat.ChatService.Messages[] messages {
             get {
                 return this.messagesField;
             }
@@ -723,28 +1428,28 @@ namespace ASP_chat.ChatService {
     public interface IChatService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientConnected", ReplyAction="http://tempuri.org/IChatService/ClientConnectedResponse")]
-        ASP_chat.ChatService.users ClientConnected(string userName, string connectionId);
+        ASP_chat.ChatService.User ClientConnected(string userName, string connectionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientConnected", ReplyAction="http://tempuri.org/IChatService/ClientConnectedResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientConnectedAsync(string userName, string connectionId);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.User> ClientConnectedAsync(string userName, string connectionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
-        ASP_chat.ChatService.messages SendMessage(int ToUser_ID, string message, int From_User_ID);
+        ASP_chat.ChatService.Messages SendMessage(int ToUser_ID, string message, int From_User_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.Messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetAllMessagesWithUser", ReplyAction="http://tempuri.org/IChatService/GetAllMessagesWithUserResponse")]
-        ASP_chat.ChatService.messages[] GetAllMessagesWithUser(int user1_id, int user2_id);
+        ASP_chat.ChatService.Messages[] GetAllMessagesWithUser(int user1_id, int user2_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/GetAllMessagesWithUser", ReplyAction="http://tempuri.org/IChatService/GetAllMessagesWithUserResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.Messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientDisconnected", ReplyAction="http://tempuri.org/IChatService/ClientDisconnectedResponse")]
-        ASP_chat.ChatService.users ClientDisconnected(string ConnectionID);
+        ASP_chat.ChatService.User ClientDisconnected(string ConnectionID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/ClientDisconnected", ReplyAction="http://tempuri.org/IChatService/ClientDisconnectedResponse")]
-        System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(string ConnectionID);
+        System.Threading.Tasks.Task<ASP_chat.ChatService.User> ClientDisconnectedAsync(string ConnectionID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -774,35 +1479,35 @@ namespace ASP_chat.ChatService {
                 base(binding, remoteAddress) {
         }
         
-        public ASP_chat.ChatService.users ClientConnected(string userName, string connectionId) {
+        public ASP_chat.ChatService.User ClientConnected(string userName, string connectionId) {
             return base.Channel.ClientConnected(userName, connectionId);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientConnectedAsync(string userName, string connectionId) {
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.User> ClientConnectedAsync(string userName, string connectionId) {
             return base.Channel.ClientConnectedAsync(userName, connectionId);
         }
         
-        public ASP_chat.ChatService.messages SendMessage(int ToUser_ID, string message, int From_User_ID) {
+        public ASP_chat.ChatService.Messages SendMessage(int ToUser_ID, string message, int From_User_ID) {
             return base.Channel.SendMessage(ToUser_ID, message, From_User_ID);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID) {
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.Messages> SendMessageAsync(int ToUser_ID, string message, int From_User_ID) {
             return base.Channel.SendMessageAsync(ToUser_ID, message, From_User_ID);
         }
         
-        public ASP_chat.ChatService.messages[] GetAllMessagesWithUser(int user1_id, int user2_id) {
+        public ASP_chat.ChatService.Messages[] GetAllMessagesWithUser(int user1_id, int user2_id) {
             return base.Channel.GetAllMessagesWithUser(user1_id, user2_id);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id) {
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.Messages[]> GetAllMessagesWithUserAsync(int user1_id, int user2_id) {
             return base.Channel.GetAllMessagesWithUserAsync(user1_id, user2_id);
         }
         
-        public ASP_chat.ChatService.users ClientDisconnected(string ConnectionID) {
+        public ASP_chat.ChatService.User ClientDisconnected(string ConnectionID) {
             return base.Channel.ClientDisconnected(ConnectionID);
         }
         
-        public System.Threading.Tasks.Task<ASP_chat.ChatService.users> ClientDisconnectedAsync(string ConnectionID) {
+        public System.Threading.Tasks.Task<ASP_chat.ChatService.User> ClientDisconnectedAsync(string ConnectionID) {
             return base.Channel.ClientDisconnectedAsync(ConnectionID);
         }
     }

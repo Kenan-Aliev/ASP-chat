@@ -12,7 +12,7 @@ namespace ASP_chat.Hubs
         // Отправка сообщений
         public void SendMessage(int toUser_ID,string message,int From_User_ID,string toConnection_ID,string fromUserName)
         {
-            ChatService.messages newMessage = ChatServiceClient.SendMessage(toUser_ID, message, From_User_ID);
+            ChatService.Messages newMessage = ChatServiceClient.SendMessage(toUser_ID, message, From_User_ID);
             Clients.Caller.writeNewMessage(newMessage);
             Clients.Client(toConnection_ID).newMessageFromUser(newMessage, From_User_ID, fromUserName);
         }
@@ -21,7 +21,7 @@ namespace ASP_chat.Hubs
         public void Connect(string userName)
         {
             string connectionId = Context.ConnectionId;
-            ChatService.users user = ChatServiceClient.ClientConnected(userName, connectionId);
+            ChatService.User user = ChatServiceClient.ClientConnected(userName, connectionId);
             Clients.Others.onConnected(user);
         }
 
@@ -29,7 +29,7 @@ namespace ASP_chat.Hubs
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
             string connectionId = Context.ConnectionId;
-            ChatService.users user = ChatServiceClient.ClientDisconnected(connectionId);
+            ChatService.User user = ChatServiceClient.ClientDisconnected(connectionId);
             Clients.All.onUserDisconnected(user);
             return base.OnDisconnected(stopCalled);
         }
@@ -42,7 +42,7 @@ namespace ASP_chat.Hubs
 
         public void SendGroupMessage(string message, string groupName,int groupId,int fromUserID) 
         {
-            GroupsService.messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
+            GroupsService.Messages newMessage = GroupsClient.SendMessage(groupId, fromUserID, message);
             Clients.Group(groupName).sendGroupMessage(newMessage,groupId,groupName);
         }
         

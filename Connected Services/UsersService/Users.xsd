@@ -1,87 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfusers">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="users" nillable="true" type="tns:users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfusers" nillable="true" type="tns:ArrayOfusers" />
-  <xs:complexType name="users">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Connection_Id" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IsOnline" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="chats" nillable="true" type="tns:ArrayOfchats" />
-      <xs:element minOccurs="0" name="chats1" nillable="true" type="tns:ArrayOfchats" />
-      <xs:element minOccurs="0" name="groups_users" nillable="true" type="tns:ArrayOfgroups_users" />
-      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="users" nillable="true" type="tns:users" />
-  <xs:complexType name="ArrayOfchats">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="chats" nillable="true" type="tns:chats" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfchats" nillable="true" type="tns:ArrayOfchats" />
-  <xs:complexType name="chats">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Chat_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="User_1" type="xs:int" />
-      <xs:element minOccurs="0" name="User_2" type="xs:int" />
-      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
-      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
-      <xs:element minOccurs="0" name="users1" nillable="true" type="tns:users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="chats" nillable="true" type="tns:chats" />
-  <xs:complexType name="ArrayOfmessages">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="messages" nillable="true" type="tns:messages" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfmessages" nillable="true" type="tns:ArrayOfmessages" />
-  <xs:complexType name="messages">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Chat_ID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="From_User" type="xs:int" />
-      <xs:element minOccurs="0" name="From_UserName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Group_ID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="IsRead" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Message_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Send_Date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="chats" nillable="true" type="tns:chats" />
-      <xs:element minOccurs="0" name="groups" nillable="true" type="tns:groups" />
-      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="messages" nillable="true" type="tns:messages" />
-  <xs:complexType name="groups">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Group_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Group_Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="groups_users" nillable="true" type="tns:ArrayOfgroups_users" />
-      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfmessages" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="groups" nillable="true" type="tns:groups" />
-  <xs:complexType name="ArrayOfgroups_users">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="groups_users" nillable="true" type="tns:groups_users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfgroups_users" nillable="true" type="tns:ArrayOfgroups_users" />
-  <xs:complexType name="groups_users">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Group_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Groups_Users_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="User_ID" type="xs:int" />
-      <xs:element minOccurs="0" name="groups" nillable="true" type="tns:groups" />
-      <xs:element minOccurs="0" name="users" nillable="true" type="tns:users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="groups_users" nillable="true" type="tns:groups_users" />
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:63418/Users.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities" />
+  <xs:element name="GetAllUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mainUserID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService1.ChatUOW.Entities" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q1:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

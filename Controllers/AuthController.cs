@@ -14,7 +14,7 @@ namespace ASP_chat.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Registration(users userData)
+        public ActionResult Registration(User userData)
         {
             try
             {
@@ -35,11 +35,11 @@ namespace ASP_chat.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(users user)
+        public ActionResult Login(User user)
         {
             try
             {
-                users us = authClient.Login(user);
+                User us = authClient.Login(user);
                 ViewBag.Message = "Вы успешно вошли в свой аккаунт";
                 return RedirectToAction("Index","Chat",us);
             }

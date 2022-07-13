@@ -12,7 +12,7 @@ namespace ASP_chat.Controllers
         UsersClient usersClient = new UsersClient();
         ChatServiceClient chatService = new ChatServiceClient();
         GroupsClient groupsClient = new GroupsClient(); 
-        public ActionResult Index(WcfService.users user)
+        public ActionResult Index(WcfService.User user)
         {
             return View("Index",user);
         }
@@ -20,7 +20,7 @@ namespace ASP_chat.Controllers
         [HttpPost]
         public JsonResult GetUsers(int mainUserID)
         {
-            UsersService.users[] users = usersClient.GetAllUsers(mainUserID);
+            UsersService.User[] users = usersClient.GetAllUsers(mainUserID);
             return Json(users,JsonRequestBehavior.AllowGet);
         }
 
@@ -35,7 +35,7 @@ namespace ASP_chat.Controllers
         [HttpPost]
         public JsonResult GetUserGroups(int mainUserID)
         {
-            GroupsService.groups[] userGroups = groupsClient.GetUserGroups(mainUserID);
+            GroupsService.Group[] userGroups = groupsClient.GetUserGroups(mainUserID);
             return Json(userGroups, JsonRequestBehavior.AllowGet);
         }
 
@@ -44,7 +44,7 @@ namespace ASP_chat.Controllers
         {
             try
             {
-                GroupsService.groups newGroup = groupsClient.CreateNewGroup(userId,groupName);
+                GroupsService.Group newGroup = groupsClient.CreateNewGroup(userId,groupName);
                 return Json(newGroup, JsonRequestBehavior.AllowGet);
             }
             catch(FaultException<ServiceError> ex)
@@ -56,14 +56,14 @@ namespace ASP_chat.Controllers
         [HttpPost]
         public JsonResult GetGroupMessages(int groupID)
         {
-            GroupsService.messages[] messages = groupsClient.GetGroupMessages(groupID);
+            GroupsService.Messages[] messages = groupsClient.GetGroupMessages(groupID);
             return Json(messages, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult GetGroupMembers(int groupID)
         {
-            GroupsService.users[] members = groupsClient.GetGroupMembers(groupID);
+            GroupsService.User[] members = groupsClient.GetGroupMembers(groupID);
             return Json(members, JsonRequestBehavior.AllowGet);
         }
 
@@ -71,7 +71,7 @@ namespace ASP_chat.Controllers
         public JsonResult AddNewUserToGroup(int groupId, int userId) 
         {
             try {
-                GroupsService.users newUser = groupsClient.AddUserToGroup(userId, groupId);
+                GroupsService.User newUser = groupsClient.AddUserToGroup(userId, groupId);
                 return Json(newUser, JsonRequestBehavior.AllowGet);
             }
             catch (FaultException<ServiceError> ex)
